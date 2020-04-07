@@ -45,19 +45,19 @@ public class EssentialsListener implements Listener
 		}
 	}
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onPlayerChangedWorldEvent(PlayerChangedWorldEvent event)
-	{
-		Player player = event.getPlayer();
-		
-		if (player.getGameMode() != GameMode.CREATIVE && !this.essentialsPlugin.getUser(player).isAuthorized("essentials.fly"))
-		{
-			//Essentials now turns off flight, fuck him
-			Boolean value = this.plugin.getWorldGuardCommunicator().getSessionManager().get(player).getHandler(FlyFlagHandler.class).getCurrentValue();
-			if (value != null)
-			{
-				player.setAllowFlight(value);
-			}
-		}
-	}
+//	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+//	public void onPlayerChangedWorldEvent(PlayerChangedWorldEvent event)
+//	{
+//		Player player = event.getPlayer();
+//
+//		if (player.getGameMode() != GameMode.CREATIVE && !this.essentialsPlugin.getUser(player).isAuthorized("essentials.fly"))
+//		{
+//			//Essentials now turns off flight, fuck him
+//			Boolean value = this.plugin.getWorldGuardCommunicator().getSessionManager().get(player).getHandler(FlyFlagHandler.class).getCurrentValue();
+//			if (value != null)
+//			{
+//				player.setAllowFlight(value);
+//			}
+//		}
+//	}
 }
