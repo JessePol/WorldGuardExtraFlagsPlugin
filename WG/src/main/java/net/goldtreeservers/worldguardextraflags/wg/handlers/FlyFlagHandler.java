@@ -68,7 +68,7 @@ public class FlyFlagHandler extends HandlerWrapper
 		{
 			boolean value = (state == State.ALLOW ? true : false);
 			
-			if (player.getAllowFlight() != value)
+			if (!player.getAllowFlight())
 			{
 				if (this.originalFly == null)
 				{
