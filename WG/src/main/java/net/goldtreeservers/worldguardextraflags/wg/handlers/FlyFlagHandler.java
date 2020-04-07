@@ -19,7 +19,7 @@ import net.goldtreeservers.worldguardextraflags.wg.wrappers.HandlerWrapper;
 
 public class FlyFlagHandler extends HandlerWrapper {
 	@Getter
-	private Boolean currentValue;
+	private Boolean currentValue = false;
 	private Boolean originalFly;
 
 	protected FlyFlagHandler(Plugin plugin, Session session) {
@@ -46,7 +46,7 @@ public class FlyFlagHandler extends HandlerWrapper {
 
 	private void handleValue(Player player, State state) {
 		if (state != null) {
-			boolean value = (state == State.ALLOW ? true : false);
+			boolean value = (state == State.ALLOW);
 
 			if (player.getAllowFlight() != value) {
 				player.setAllowFlight(false);

@@ -130,48 +130,47 @@ public class PlayerListener implements Listener
 		}
 	}
 
-//	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-//	public void onPlayerGameModeChangeEvent(PlayerGameModeChangeEvent event)
-//	{
-//		Player player = event.getPlayer();
-//
-//		Session wgSession = this.plugin.getWorldGuardCommunicator().getSessionManager().getIfPresent(player);
-//		if (wgSession != null)
-//		{
-//			Boolean value = wgSession.getHandler(FlyFlagHandler.class).getCurrentValue();
-//			if (value != null)
-//			{
-//				new BukkitRunnable()
-//				{
-//					@Override
-//					public void run()
-//					{
-//						PlayerListener.this.checkFlyStatus(player);
-//					}
-//				}.runTask(WorldGuardExtraFlagsPlugin.getPlugin());
-//			}
-//		}
-//		else
-//		{
-//			new BukkitRunnable()
-//			{
-//				@Override
-//				public void run()
-//				{
-//					PlayerListener.this.checkFlyStatus(player);
-//				}
-//			}.runTask(WorldGuardExtraFlagsPlugin.getPlugin());
-//		}
-//	}
-//
-//	private void checkFlyStatus(Player player)
-//	{
-//		Boolean value = this.plugin.getWorldGuardCommunicator().getSessionManager().get(player).getHandler(FlyFlagHandler.class).getCurrentValue();
-//		if (value != null)
-//		{
-//			player.setAllowFlight(value);
-//		}
-//	}
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onPlayerGameModeChangeEvent(PlayerGameModeChangeEvent event)
+	{
+		Player player = event.getPlayer();
+		Session wgSession = this.plugin.getWorldGuardCommunicator().getSessionManager().getIfPresent(player);
+		if (wgSession != null)
+		{
+			Boolean value = wgSession.getHandler(FlyFlagHandler.class).getCurrentValue();
+			if (value != null)
+			{
+				new BukkitRunnable()
+				{
+					@Override
+					public void run()
+					{
+						PlayerListener.this.checkFlyStatus(player);
+					}
+				}.runTask(WorldGuardExtraFlagsPlugin.getPlugin());
+			}
+		}
+		else
+		{
+			new BukkitRunnable()
+			{
+				@Override
+				public void run()
+				{
+					PlayerListener.this.checkFlyStatus(player);
+				}
+			}.runTask(WorldGuardExtraFlagsPlugin.getPlugin());
+		}
+	}
+
+	private void checkFlyStatus(Player player)
+	{
+		Boolean value = this.plugin.getWorldGuardCommunicator().getSessionManager().get(player).getHandler(FlyFlagHandler.class).getCurrentValue();
+		if (value != null)
+		{
+			player.setAllowFlight(false);
+		}
+	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerItemDamageEvent(PlayerItemDamageEvent event)
@@ -199,15 +198,15 @@ public class PlayerListener implements Listener
 		}
 	}
 	
-//	@EventHandler(priority = EventPriority.MONITOR)
-//	public void onPlayerJoinEvent(PlayerJoinEvent event)
-//	{
-//		Player player = event.getPlayer();
-//
-//		Boolean value = this.plugin.getWorldGuardCommunicator().getSessionManager().get(player).getHandler(FlyFlagHandler.class).getCurrentValue();
-//		if (value != null)
-//		{
-//			player.setAllowFlight(value);
-//		}
-//	}
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerJoinEvent(PlayerJoinEvent event)
+	{
+		Player player = event.getPlayer();
+
+		Boolean value = this.plugin.getWorldGuardCommunicator().getSessionManager().get(player).getHandler(FlyFlagHandler.class).getCurrentValue();
+		if (value != null)
+		{
+			player.setAllowFlight(false);
+		}
+	}
 }
